@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting to app...</title>
+  <script>
+    const token = window.location.pathname.split('/').pop();
+    const deepLink = `a8ari://verify-email/${token}`;
+    window.location.href = deepLink;
+
+    setTimeout(() => {
+      window.location.href = 'https://a8ari.com/download';
+    }, 3000);
+  </script>
+</head>
+<body>
+  <p>Redirecting to the app...</p>
+</body>
+</html>
