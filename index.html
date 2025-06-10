@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Redirecting to app...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting...</title>
   <script>
-    const token = window.location.pathname.split('/').pop();
-    const deepLink = `a8ari://verify-email/${token}`;
-    window.location.href = deepLink;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
 
-    setTimeout(() => {
-      window.location.href = 'https://a8ari.com/download';
-    }, 3000);
+    if (token) {
+      // Redirect to the app using the custom scheme with token
+      window.location.href = `a8ari://verify-email?token=${token}`;
+    } else {
+      document.body.innerHTML = 'Missing verification token.';
+    }
   </script>
 </head>
 <body>
-  <p>Redirecting to the app...</p>
+  <p>Redirecting... If not redirected, <a id="manual-link" href="#">click here</a>.</p>
+  <script>
+    const manualLink = document.getElementById('manual-link');
+    if (params.get("token")) {
+      manualLink.href = `a8ari://verify-email?token=${params.get("token")}`;
+    }
+  </script>
 </body>
 </html>
